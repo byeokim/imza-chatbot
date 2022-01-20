@@ -10,10 +10,10 @@ const { errorResObject } = require("../helpers/utils");
  * 참조: https://i.kakao.com/docs/skill-response-format#action
  */
 module.exports = async (req, res) => {
-  // authenticate.js 에서 req에 추가한 사용자 객체
-  const { bookUser } = req;
-
   try {
+    // bookUser: authenticate.js 에서 req에 추가한 사용자 객체
+    const { bookUser } = req;
+
     // currentlyBorrowedBooks: Array<{
     //   idx: number;
     //   user_idx: number;

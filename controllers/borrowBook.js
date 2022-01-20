@@ -11,8 +11,9 @@ const { errorResObject } = require("../helpers/utils");
  */
 module.exports = async (req, res) => {
   try {
-    const { action } = req.body;
+    // bookUser: authenticate.js 에서 req에 추가한 사용자 객체
     const { bookUser } = req;
+    const { action } = req.body;
     const { barcodeData } = JSON.parse(action.params.barcode);
 
     // booksToBeBorrowed: Array<{
