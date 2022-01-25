@@ -1,4 +1,4 @@
-const connection = require("../helpers/mysql");
+const pool = require("../helpers/mysql");
 const { errorResObject } = require("../helpers/utils");
 
 const BOOK_LIST_URL = process.env.BOOK_LIST_URL;
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     // }>
     const searchedBooks = await (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "SELECT * FROM book WHERE name LIKE ?",
           `%${action.params.book_name}%`,
           (err, results) => {

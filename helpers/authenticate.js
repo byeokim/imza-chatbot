@@ -1,4 +1,4 @@
-const connection = require("./mysql");
+const pool = require("./mysql");
 const { errorResObject } = require("./utils");
 
 module.exports = async (req, res, next) => {
@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     // https://i.kakao.com/docs/skill-response-format#skillpayload
     (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "INSERT INTO kakao_chat_request (con) VALUES (?)",
           JSON.stringify(req.body),
           (err, results) => {
@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
     // }>
     const bookUsers = await (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "SELECT * FROM book_user WHERE user_id = ?",
           // https://i.kakao.com/docs/skill-response-format#userrequest
           userRequest.user.id,

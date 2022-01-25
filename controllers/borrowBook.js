@@ -1,4 +1,4 @@
-const connection = require("../helpers/mysql");
+const pool = require("../helpers/mysql");
 const { errorResObject } = require("../helpers/utils");
 
 /**
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     // }>
     const booksToBeBorrowed = await (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "SELECT * FROM book WHERE isbn = ?",
           barcodeData,
           (err, results) => {
@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
     // }>
     const bookBorrows = await (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "SELECT * FROM book_borrow WHERE book_idx = ? AND return_date is NULL",
           bookToBeBorrowed.idx,
           (err, results) => {
@@ -106,7 +106,7 @@ module.exports = async (req, res) => {
     // }
     await (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "INSERT INTO book_borrow SET ?",
           {
             user_idx: bookUser.idx,

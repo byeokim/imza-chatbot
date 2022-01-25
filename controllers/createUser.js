@@ -1,4 +1,4 @@
-const connection = require("../helpers/mysql");
+const pool = require("../helpers/mysql");
 const { errorResObject } = require("../helpers/utils");
 
 /**
@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     // }
     await (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "INSERT INTO book_user SET ?",
           {
             // https://i.kakao.com/docs/skill-response-format#user

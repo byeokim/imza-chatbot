@@ -1,4 +1,4 @@
-const connection = require("../helpers/mysql");
+const pool = require("../helpers/mysql");
 const { errorResObject } = require("../helpers/utils");
 
 /**
@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     // }>
     const notReturnedBooks = await (() =>
       new Promise((resolve, reject) =>
-        connection.query(
+        pool.query(
           "SELECT * FROM book_borrow WHERE user_idx = ? AND return_date is NULL",
           bookUser.idx,
           (err, results) => {
@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
       // }>
       const books = await (() =>
         new Promise((resolve, reject) =>
-          connection.query(
+          pool.query(
             "SELECT * FROM book WHERE idx = ?",
             notReturnedBook.book_idx,
             (err, results) => {
